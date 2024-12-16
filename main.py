@@ -1,6 +1,6 @@
 # importer le module tkinter
 import tkinter as tk
-from tkinter.constants import ANCHOR, CENTER
+from tkinter import StringVar, OptionMenu
 
 # définir une fenêtre
 game = tk.Tk()
@@ -9,14 +9,27 @@ game = tk.Tk()
 game.title("Demineur")
 game.geometry("600x600")
 
+# définir une fonction qui ferme la fenêtre
 def exit():
     game.destroy()
 
-lbl = tk.Label(game, text="Demineur", fg="white", bg="black")
-lbl.pack()
+# définir une fonction qui affiche une liste déroulante
+def click():
+    options = [
+        "Facile 9 x 9",
+        "Moyen 16 x 16",
+        "Difficile 30 x 16"
+    ]
+    clicked = StringVar()
+    clicked.set("Choisir la Difficulté")
+    drop = OptionMenu(game, clicked ,*options)
+    drop.pack()
 
-btn = tk.Button(game, text="Close Game", command=exit)
-btn.grid(column=1, row=0)
+# définir des boutons avec des actions
+stop = tk.Button(game, text="Arrêter le Jeu", command=exit)
+stop.grid(column=1, row=0)
+play = tk.Button(game, text="Jouer", command=click)
+play.grid(column=1, row=1)
 
 #ouvrir la fenêtre
 game.mainloop()
