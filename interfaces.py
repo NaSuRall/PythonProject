@@ -34,40 +34,25 @@ root.title("Jeu Démineur")  # Titre de la fenêtre
 root.geometry("600x500")  # Largeur x Hauteur
 
 # Ajout d'un label (texte d'accueil)
-label_titre_principal = tk.Label(
-    root, text="Bienvenue dans le jeu Démineur", font=("Arial", 20), pady=20
-)
+label_titre_principal = tk.Label(root, text="Bienvenue dans le jeu Démineur", font=("Arial", 20), pady=20)
 label_titre_principal.pack()  # Place le label dans la fenêtre
 
 # Sous-titre pour choisir la difficulté
-label_difficulte = tk.Label(
-    root, text="Choisissez une difficulté :", font=("Arial", 16), pady=10
-)
+label_difficulte = tk.Label(root, text="Choisissez une difficulté :", font=("Arial", 16), pady=10)
 label_difficulte.pack()
 
 # Boutons pour choisir la difficulté et démarrer une partie
-bouton_facile = tk.Button(
-    root, text="Facile (9x9, 10 mines)", font=("Arial", 14),
-    command=lambda: démarrer_partie_de_demineur("Facile")
-)
+bouton_facile = tk.Button(root, text="Facile (9x9, 10 mines)", font=("Arial", 14),command=lambda: démarrer_partie_de_demineur("Facile"))
 bouton_facile.pack(pady=5)
 
-bouton_moyen = tk.Button(
-    root, text="Moyen (16x16, 40 mines)", font=("Arial", 14),
-    command=lambda: démarrer_partie_de_demineur("Moyen")
-)
+bouton_moyen = tk.Button(root, text="Moyen (16x16, 40 mines)", font=("Arial", 14),command=lambda: démarrer_partie_de_demineur("Moyen"))
 bouton_moyen.pack(pady=5)
 
-bouton_difficile = tk.Button(
-    root, text="Difficile (30x16, 99 mines)", font=("Arial", 14),
-    command=lambda: démarrer_partie_de_demineur("Difficile")
-)
+bouton_difficile = tk.Button(root, text="Difficile (30x16, 99 mines)", font=("Arial", 14),command=lambda: démarrer_partie_de_demineur("Difficile"))
 bouton_difficile.pack(pady=5)
 
 # Bouton pour quitter l'application
-bouton_quitter_application = tk.Button(
-    root, text="Quitter l'application", font=("Arial", 14), command=quitter_application_demineur
-)
+bouton_quitter_application = tk.Button(root, text="Quitter l'application", font=("Arial", 14), command=quitter_application_demineur)
 bouton_quitter_application.pack(pady=20)
 
 # Boucle principale pour afficher la fenêtre
