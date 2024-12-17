@@ -1,5 +1,14 @@
 import tkinter as tk
 from tkinter import messagebox
+from Grille import Grille
+
+
+longueur = 9
+largeur = 9
+
+
+grille = Grille(longueur, largeur)
+grille.afficherGrille()
 
 
 def démarrer_partie_de_demineur(difficulté):
