@@ -1,3 +1,4 @@
+
 import random
 
 
@@ -8,25 +9,22 @@ class Grille:
         self.tab = self.generationGrille()
 
     def generationGrille(self):
-        # Créer un tableau vide de dimensions 'largeur' x 'longueur' avec des zéros et des bordures
         tab = []
         for i in range(self.largeur):
             ligne = []
             for j in range(self.longueur):
                 if i == 0 or i == self.largeur - 1 or j == 0 or j == self.longueur - 1:
-                    ligne.append("/")  # Bordure
+                    ligne.append("/")
                 else:
-                    ligne.append(0)  # Intérieur de la grille
+                    ligne.append(0)
             tab.append(ligne)
-
-        # Placer des "1" à l'intérieur de la grille de manière aléatoire
         placements = self.getPlacements()
         while placements > 0:
             i = random.randint(1, self.largeur - 2)  # Pas sur les bords
             j = random.randint(1, self.longueur - 2)  # Pas sur les bords
 
             if tab[i][j] == 0:
-                tab[i][j] = "x"
+                tab[i][j] = "💣"
                 placements -= 1
         return tab
 

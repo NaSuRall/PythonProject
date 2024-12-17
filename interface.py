@@ -5,6 +5,5 @@ largeur = 9
 
 
 grille = Grille(longueur, largeur)
-grille.incrementerAutour(9,9)
 grille.afficherGrille()
 
