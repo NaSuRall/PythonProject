@@ -49,3 +49,5 @@ class Grille:
                 if 0 <= i < self.largeur and 0 <= j < self.longueur:  # Vérifier si la case est dans les limites
                     if self.tab[i][j] != "X":  # On ne veut pas incrémenter la case contenant déjà un X
                         self.tab[i][j] += 1
+
+

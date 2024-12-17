@@ -3,14 +3,6 @@ from tkinter import messagebox
 from Grille import Grille
 
 
-longueur = 9
-largeur = 9
-
-
-grille = Grille(longueur, largeur)
-grille.afficherGrille()
-
-
 def démarrer_partie_de_demineur(difficulté):
     """
     Fonction appelée lorsque l'utilisateur sélectionne une difficulté.
@@ -25,44 +17,72 @@ def démarrer_partie_de_demineur(difficulté):
         return
 
     # Afficher un message de démarrage avec la difficulté
-    messagebox.showinfo("Démineur",f"La partie va commencer en mode {difficulté} . Bonne chance !")
-    # Ici, tu pourras appeler la fonction pour initialiser et afficher le plateau de jeu.
-    # Exemple : `start_game(rows, cols, mines)`
+    messagebox.showinfo("Démineur", f"La partie va commencer en mode {difficulté}. Bonne chance !")
+
+    # Générer la grille
+    grille = Grille(rows, cols)
+
+    # Effacer l'interface actuelle
+    for widget in root.winfo_children():
+        widget.destroy()
+
+    # Afficher la grille dans l'interface
+    frame_grille = tk.Frame(root)
+    frame_grille.pack()
+
+    for i in range(grille.largeur):
+        for j in range(grille.longueur):
+            bouton = tk.Button(frame_grille, text=" ", width=3, height=1)
+            bouton.grid(row=i, column=j)
+
+    # Bouton pour revenir au menu principal
+    tk.Button(root, text="Revenir au menu", font=("Arial", 14), command=menu_principal).pack(pady=20)
 
 
 def quitter_application_demineur():
-    """ Fonction appelée lorsque l'utilisateur clique sur "Quitter". """
-    root.destroy()  # Ferme la fenêtre principale
+    root.destroy()
+
+
+def menu_principal():
+
+    # Efface les widgets existants
+    for widget in root.winfo_children():
+        widget.destroy()
+
+    # Ajout label )
+    label_titre_principal = tk.Label(root, text="Bienvenue dans le jeu Démineur", font=("Arial", 20), pady=20)
+    label_titre_principal.pack()
+
+    # Sous-titre pour choisir la difficulté
+    label_difficulte = tk.Label(root, text="Choisissez une difficulté :", font=("Arial", 16), pady=10)
+    label_difficulte.pack()
+
+    # Boutons pour choisir la difficulté et démarrer une partie
+    bouton_facile = tk.Button(root, text="Facile (9x9, 10 mines)", font=("Arial", 14),
+                              command=lambda: démarrer_partie_de_demineur("Facile"))
+    bouton_facile.pack(pady=5)
+
+    bouton_moyen = tk.Button(root, text="Moyen (16x16, 40 mines)", font=("Arial", 14),
+                             command=lambda: démarrer_partie_de_demineur("Moyen"))
+    bouton_moyen.pack(pady=5)
+
+    bouton_difficile = tk.Button(root, text="Difficile (30x16, 99 mines)", font=("Arial", 14),
+                                 command=lambda: démarrer_partie_de_demineur("Difficile"))
+    bouton_difficile.pack(pady=5)
+
+    # Bouton pour quitter l'application
+    bouton_quitter_application = tk.Button(root, text="Quitter l'application", font=("Arial", 14),
+                                           command=quitter_application_demineur)
+    bouton_quitter_application.pack(pady=20)
 
 
 # Création de la fenêtre principale
 root = tk.Tk()
-root.title("Jeu Démineur")  # Titre de la fenêtre
+root.title("Jeu Démineur")
+root.geometry("1920x1080")
 
-# Configuration de la taille de la fenêtre
-root.geometry("600x500")  # Largeur x Hauteur
-
-# Ajout d'un label (texte d'accueil)
-label_titre_principal = tk.Label(root, text="Bienvenue dans le jeu Démineur", font=("Arial", 20), pady=20)
-label_titre_principal.pack()  # Place le label dans la fenêtre
-
-# Sous-titre pour choisir la difficulté
-label_difficulte = tk.Label(root, text="Choisissez une difficulté :", font=("Arial", 16), pady=10)
-label_difficulte.pack()
-
-# Boutons pour choisir la difficulté et démarrer une partie
-bouton_facile = tk.Button(root, text="Facile (9x9, 10 mines)", font=("Arial", 14),command=lambda: démarrer_partie_de_demineur("Facile"))
-bouton_facile.pack(pady=5)
-
-bouton_moyen = tk.Button(root, text="Moyen (16x16, 40 mines)", font=("Arial", 14),command=lambda: démarrer_partie_de_demineur("Moyen"))
-bouton_moyen.pack(pady=5)
-
-bouton_difficile = tk.Button(root, text="Difficile (30x16, 99 mines)", font=("Arial", 14),command=lambda: démarrer_partie_de_demineur("Difficile"))
-bouton_difficile.pack(pady=5)
-
-# Bouton pour quitter l'application
-bouton_quitter_application = tk.Button(root, text="Quitter l'application", font=("Arial", 14), command=quitter_application_demineur)
-bouton_quitter_application.pack(pady=20)
+# Afficher le menu principal
+menu_principal()
 
 # Boucle principale pour afficher la fenêtre
 root.mainloop()
