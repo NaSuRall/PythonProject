@@ -24,10 +24,14 @@ class Grid:
         return grid
 
     def draw(self, screen):
+        # L'espace réservé pour l'affichage du score et du nom du joueur
+        start_y = 60  # L'espace laissé pour le score et le nom du joueur
+
         for row in range(self.rows):
             for col in range(self.cols):
+                # Calculer la position en fonction de la taille des tuiles et de la marge
                 x = col * (TILE_SIZE + MARGIN)
-                y = row * (TILE_SIZE + MARGIN)
+                y = row * (TILE_SIZE + MARGIN) + start_y  # Décalage vers le bas
                 rect = pygame.Rect(x, y, TILE_SIZE, TILE_SIZE)
 
                 if self.revealed[row][col]:
