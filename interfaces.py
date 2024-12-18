@@ -1,6 +1,7 @@
 import tkinter as tk
-from tkinter import messagebox
+from tkinter import messagebox, simpledialog
 from Grille import Grille
+
 
 
 def démarrer_partie_de_demineur(difficulté):
@@ -39,8 +40,19 @@ def démarrer_partie_de_demineur(difficulté):
     tk.Button(root, text="Revenir au menu", font=("Arial", 14), command=menu_principal).pack(pady=20)
 
 
+
 def quitter_application_demineur():
     root.destroy()
+
+
+def on_victory():
+    """Félicite le joueur et enregistre son nom."""
+    nom = simpledialog.askstring("Félicitations !", "Vous avez gagné ! Entrez votre nom :")
+    if nom:
+        messagebox.showinfo("Victoire !", f"Bravo {nom}, vous avez gagné !")
+
+
+
 
 
 def menu_principal():
@@ -58,21 +70,17 @@ def menu_principal():
     label_difficulte.pack()
 
     # Boutons pour choisir la difficulté et démarrer une partie
-    bouton_facile = tk.Button(root, text="Facile (9x9, 10 mines)", font=("Arial", 14),
-                              command=lambda: démarrer_partie_de_demineur("Facile"))
+    bouton_facile = tk.Button(root, text="Facile (9x9, 10 mines)", font=("Arial", 14),command=lambda: démarrer_partie_de_demineur("Facile"))
     bouton_facile.pack(pady=5)
 
-    bouton_moyen = tk.Button(root, text="Moyen (16x16, 40 mines)", font=("Arial", 14),
-                             command=lambda: démarrer_partie_de_demineur("Moyen"))
+    bouton_moyen = tk.Button(root, text="Moyen (16x16, 40 mines)", font=("Arial", 14),command=lambda: démarrer_partie_de_demineur("Moyen"))
     bouton_moyen.pack(pady=5)
 
-    bouton_difficile = tk.Button(root, text="Difficile (30x16, 99 mines)", font=("Arial", 14),
-                                 command=lambda: démarrer_partie_de_demineur("Difficile"))
+    bouton_difficile = tk.Button(root, text="Difficile (30x16, 99 mines)", font=("Arial", 14),command=lambda: démarrer_partie_de_demineur("Difficile"))
     bouton_difficile.pack(pady=5)
 
     # Bouton pour quitter l'application
-    bouton_quitter_application = tk.Button(root, text="Quitter l'application", font=("Arial", 14),
-                                           command=quitter_application_demineur)
+    bouton_quitter_application = tk.Button(root, text="Quitter l'application", font=("Arial", 14),command=quitter_application_demineur)
     bouton_quitter_application.pack(pady=20)
 
 
@@ -84,5 +92,23 @@ root.geometry("1920x1080")
 # Afficher le menu principal
 menu_principal()
 
+
 # Boucle principale pour afficher la fenêtre
 root.mainloop()
+
+
+
+# on a definie une fenetre qui montrera les scores du demineur
+root_2=tk.Tk()
+
+root_2.title("Score")  # Titre de la fenêtre appellé score
+root_2.geometry("600x500")  # fenetre taille 600x500
+
+partie_terminer_message=messagebox.showinfo("partie terminer", "félicitation la partie est terminée")
+nom_titre= tk.Label(root_2, text="Nom", font=("Arial", 20), pady=10) #Nom du champ appelé nom
+nom_titre.pack()
+nom_utilisateur=tk.Entry(root_2)#creation d'un champ qu'on assosie a la fenetre du module tk
+nom_utilisateur.pack()
+
+
+root_2.mainloop()
