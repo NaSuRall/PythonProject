@@ -84,7 +84,8 @@ class Game:
                 elif event.type == pygame.KEYDOWN:
                     if active:
                         if event.key == pygame.K_RETURN:
-                            return text  # Return player's name when Enter is pressed
+                            #retourne le pseudo du joueur quand la touche entrer est pressé
+                            return text
                         elif event.key == pygame.K_BACKSPACE:
                             text = text[:-1]
                         else:
@@ -99,11 +100,11 @@ class Game:
         while running:
             self.screen.fill(BLACK)
 
-            # Display player's name and score (above the grid)
+            #afffiche le nom et le score du joueur
             score_text = FONT.render(f"{player_name}'s Score: {score}", True, WHITE)
             self.screen.blit(score_text, (20, 20))
 
-            # Draw the grid below the score display
+            #dessine la grille
             grid.draw(self.screen)
 
             pygame.display.flip()
@@ -114,23 +115,27 @@ class Game:
                     sys.exit()
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     x, y = event.pos
+                    #permet de calculer la taille des case
                     col = x // (30 + 2)
-                    row = (y - 60) // (30 + 2)  # Adjust row calculation by subtracting 60 for the space above
+                    row = (y - 60) // (30 + 2)
 
-                    if event.button == 1:  # Left click
+                    #clique gauche
+                    if event.button == 1:
                         grid.reveal_tile(row, col)
                         if grid.is_bomb(row, col):
                             running = False
-                    elif event.button == 3:  # Right click
+                    # clique droit
+                    elif event.button == 3:
                         grid.toggle_flag(row, col)
 
             if grid.check_win():
-                score += 10  # Increment score when the player wins
+                score += 10
                 running = False
 
-        # Game over, show final score
+        # une fois la partie terminer
         self.screen.fill(BLACK)
         game_over_text = FONT.render(f"Game Over! {player_name}, your score: {score}", True, WHITE)
         self.screen.blit(game_over_text, (20, 100))
         pygame.display.flip()
-        pygame.time.wait(3000)  # Wait for 3 seconds before quitting
+        #quitte la partie au bout de 3 secondes
+        pygame.time.wait(3000)
