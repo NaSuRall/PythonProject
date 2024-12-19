@@ -1,6 +1,6 @@
 import pygame
 import sys
-from constants import BLACK, WHITE, GRAY, FONT
+from constants import BLACK, WHITE, GRAY, FONT, DARK_GRAY
 from grid import Grid
 
 class Game:
@@ -18,12 +18,19 @@ class Game:
     def show_menu(self):
         while True:
             self.screen.fill(BLACK)
-            text = FONT.render("Choisissez une difficulté:", True, WHITE)
-            self.screen.blit(text, (20, 20))
 
-            easy_button = pygame.Rect(20, 80, 200, 50)
-            medium_button = pygame.Rect(20, 150, 200, 50)
-            hard_button = pygame.Rect(20, 220, 200, 50)
+
+            title_text = FONT.render("Démineur", True, WHITE)
+            self.screen.blit(title_text, (20, 20))
+
+
+            difficulty_text = FONT.render("Choisissez une difficulté:", True, WHITE)
+            self.screen.blit(difficulty_text, (20, 80))
+
+
+            easy_button = pygame.Rect(20, 140, 200, 50)
+            medium_button = pygame.Rect(20, 210, 200, 50)
+            hard_button = pygame.Rect(20, 280, 200, 50)
 
             pygame.draw.rect(self.screen, GRAY, easy_button)
             pygame.draw.rect(self.screen, GRAY, medium_button)
@@ -33,12 +40,16 @@ class Game:
             medium_text = FONT.render("Moyen (16x16)", True, BLACK)
             hard_text = FONT.render("Difficile (30x16)", True, BLACK)
 
-            self.screen.blit(easy_text, (30, 90))
-            self.screen.blit(medium_text, (30, 160))
-            self.screen.blit(hard_text, (30, 230))
+            self.screen.blit(easy_text, (30, 150))
+            self.screen.blit(medium_text, (30, 220))
+            self.screen.blit(hard_text, (30, 290))
+
+            # Dessiner une grille vide
+            self.draw_empty_grid()
 
             pygame.display.flip()
 
+            # Gestion des événements
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -50,6 +61,27 @@ class Game:
                         return (16, 16, 40)
                     elif hard_button.collidepoint(event.pos):
                         return (16, 30, 99)
+
+    #creer une grille vide a utiliser dans le menue
+    def draw_empty_grid(self):
+        # Taille des cases
+        TILE_SIZE = 30
+        MARGIN = 2
+
+        # Définir la taille d'une grille de démonstration (9x9 par exemple)
+        rows, cols = 9, 9
+
+        # Calculer le point de départ pour centrer la grille
+        start_x = (self.screen.get_width() - (cols * (TILE_SIZE + MARGIN))) // 2
+        start_y = 400  # Position verticale fixe
+
+        for row in range(rows):
+            for col in range(cols):
+                x = start_x + col * (TILE_SIZE + MARGIN)
+                y = start_y + row * (TILE_SIZE + MARGIN)
+                rect = pygame.Rect(x, y, TILE_SIZE, TILE_SIZE)
+                pygame.draw.rect(self.screen, GRAY, rect)  # Case grise
+                pygame.draw.rect(self.screen, DARK_GRAY, rect, 1)
 
     def ask_for_name(self):
         # Ask for player's name
