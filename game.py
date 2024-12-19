@@ -62,6 +62,9 @@ class Game:
 
         while True:
             self.screen.fill(BLACK)
+            label_text = "Votre pseudo:"
+            label_surface = FONT.render(label_text, True, WHITE)
+            self.screen.blit(label_surface, (input_box.x, input_box.y - 40))
             pygame.draw.rect(self.screen, color, input_box, 2)
             text_surface = FONT.render(text, True, WHITE)
             self.screen.blit(text_surface, (input_box.x + 5, input_box.y + 5))
