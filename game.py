@@ -1,6 +1,6 @@
 import pygame
 import sys
-from constants import BLACK, WHITE, GRAY, FONT, DARK_GRAY
+from constants import BLACK, WHITE, GRAY, FONT, DARK_GRAY, BLUE
 from grid import Grid
 
 class Game:
@@ -17,7 +17,7 @@ class Game:
 
     def show_menu(self):
         while True:
-            self.screen.fill(BLACK)
+            self.screen.fill(BLUE)
 
 
             title_text = FONT.render("Démineur", True, WHITE)
@@ -84,7 +84,6 @@ class Game:
                 pygame.draw.rect(self.screen, DARK_GRAY, rect, 1)
 
     def ask_for_name(self):
-        # Ask for player's name
         input_box = pygame.Rect(200, 300, 400, 50)
         color_inactive = pygame.Color('lightskyblue3')
         color_active = pygame.Color('dodgerblue2')
@@ -93,7 +92,7 @@ class Game:
         active = False
 
         while True:
-            self.screen.fill(BLACK)
+            self.screen.fill(BLUE)
             label_text = "Votre pseudo:"
             label_surface = FONT.render(label_text, True, WHITE)
             self.screen.blit(label_surface, (input_box.x, input_box.y - 40))
@@ -130,7 +129,7 @@ class Game:
         score = 0
 
         while running:
-            self.screen.fill(BLACK)
+            self.screen.fill(BLUE)
 
             #afffiche le nom et le score du joueur
             score_text = FONT.render(f"{player_name}'s Score: {score}", True, WHITE)
