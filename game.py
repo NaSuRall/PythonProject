@@ -56,7 +56,7 @@ class Game:
                     sys.exit()
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     if easy_button.collidepoint(event.pos):
-                        return (9, 9, 30)
+                        return (9, 9, 10)
                     elif medium_button.collidepoint(event.pos):
                         return (16, 16, 40)
                     elif hard_button.collidepoint(event.pos):
@@ -68,12 +68,12 @@ class Game:
         TILE_SIZE = 30
         MARGIN = 2
 
-        # Définir la taille d'une grille de démonstration (9x9 par exemple)
+        # Définir la taille d'une grille de démonstration
         rows, cols = 9, 9
 
         # Calculer le point de départ pour centrer la grille
         start_x = (self.screen.get_width() - (cols * (TILE_SIZE + MARGIN))) // 2
-        start_y = 400  # Position verticale fixe
+        start_y = 400
 
         for row in range(rows):
             for col in range(cols):
